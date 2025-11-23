@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.io.IOException;
@@ -9,10 +8,8 @@ import model.Music;
 import model.Book;
 import persistence.MediaDAO;
 
-/**
- * Controlador principal (camada de negócios). Implementa operações solicitadas no enunciado.
- */
 public class MediaController {
+
     private List<Media> medias;
     private MediaDAO dao;
 
@@ -21,26 +18,30 @@ public class MediaController {
         this.medias = dao.loadAll();
     }
 
-    public void addMedia(Media m) throws IOException {
-        medias.add(m);
-        dao.saveMedia(m);
+    public void addMedia(Media media) throws IOException {
+        medias.add(media);
+        dao.saveMedia(media);
     }
 
-    public void removeMedia(Media m) {
-        medias.remove(m);
-        dao.deleteMedia(m);
+    public void removeMedia(Media media) {
+        medias.remove(media);
+        dao.deleteMedia(media);
     }
 
-    public List<Media> listByType(Class<?> cls) {
-        List<Media> out = new ArrayList<>();
-        for (Media m : medias) if (cls.isInstance(m)) out.add(m);
-        return out;
+    public List<Media> listByType(Class<?> type) {
+        List<Media> filtered = new ArrayList<>();
+        for (Media media : medias) {
+            if (type.isInstance(media)) filtered.add(media);
+        }
+        return filtered;
     }
 
     public List<Media> listByCategory(String category) {
-        List<Media> out = new ArrayList<>();
-        for (Media m : medias) if (m.getCategory().equalsIgnoreCase(category)) out.add(m);
-        return out;
+        List<Media> filtered = new ArrayList<>();
+        for (Media media : medias) {
+            if (media.getCategory().equalsIgnoreCase(category)) filtered.add(media);
+        }
+        return filtered;
     }
 
     public List<Media> listAll() {
@@ -48,33 +49,32 @@ public class MediaController {
     }
 
     public void editMedia(Media original, Media updated) throws IOException {
-        // replace in memory and re-save (delete old file if title changed)
         medias.remove(original);
         dao.deleteMedia(original);
         medias.add(updated);
         dao.saveMedia(updated);
     }
 
-    public void moveMedia(Media m, String newPath) throws IOException {
-        m.setLocalPath(newPath);
-        dao.saveMedia(m);
+    public void moveMedia(Media media, String newPath) throws IOException {
+        media.setLocalPath(newPath);
+        dao.saveMedia(media);
     }
 
-    public void renameMedia(Media m, String newTitle) throws IOException {
-        dao.deleteMedia(m);
-        m.setTitle(newTitle);
-        dao.saveMedia(m);
+    public void renameMedia(Media media, String newTitle) throws IOException {
+        dao.deleteMedia(media);
+        media.setTitle(newTitle);
+        dao.saveMedia(media);
     }
 
     public List<Media> sortByTitle() {
-        List<Media> out = listAll();
-        Collections.sort(out);
-        return out;
+        List<Media> sorted = listAll();
+        Collections.sort(sorted);
+        return sorted;
     }
 
     public List<Media> sortByDuration() {
-        List<Media> out = listAll();
-        out.sort(Comparator.comparingLong(Media::getDurationValue));
-        return out;
+        List<Media> sorted = listAll();
+        sorted.sort(Comparator.comparingLong(Media::getDurationValue));
+        return sorted;
     }
 }

@@ -1,15 +1,11 @@
-
 package model;
 
-import java.util.List;
-
-/**
- * Classe Book - duração em páginas e autores.
- */
 public class Book extends Media {
+
     private static final long serialVersionUID = 1L;
+
     private int pages;
-    private String authors; // lista simplificada
+    private String authors;
 
     public Book(String localPath, long sizeBytes, String title, String category, int pages, String authors) {
         super(localPath, sizeBytes, title, category);
@@ -17,14 +13,26 @@ public class Book extends Media {
         this.authors = authors;
     }
 
-    public int getPages() { return pages; }
-    public void setPages(int pages) { this.pages = pages; }
+    public int getPages() {
+        return pages;
+    }
 
-    public String getAuthors() { return authors; }
-    public void setAuthors(String authors) { this.authors = authors; }
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
 
     @Override
-    public long getDurationValue() { return pages; }
+    public long getDurationValue() {
+        return pages;
+    }
 
     @Override
     public String displaySpecificAttributes() {
