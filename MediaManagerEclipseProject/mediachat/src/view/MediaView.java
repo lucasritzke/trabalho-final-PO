@@ -1,25 +1,33 @@
 
 package view;
 
-import controller.MediaController;
-import model.*;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Visual simples em Swing. Contém botões para adicionar/editar/remover e uma tabela para exibir mídias.
- */
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import controller.MediaController;
+import model.Media;
+
+
 public class MediaView extends JFrame {
-    private MediaController controller;
+ static final long serialVersionUID = 1L;
+	private MediaController controller;
     private JTable table;
     private DefaultTableModel tableModel;
 
     public MediaView(MediaController controller) {
-        super("Gerenciador de Mídias - TPOO");
+        super("Gerenciador de Mídias");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\lb157\\Downloads\\roteiro.png"));
+        setTitle("Gerenciador de Mídias Pessoal\r\n");
         this.controller = controller;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(900, 500);
@@ -28,7 +36,8 @@ public class MediaView extends JFrame {
         loadTable(controller.listAll());
     }
 
-    private void initComponents() {
+    @SuppressWarnings("serial")
+	private void initComponents() {
         JPanel top = new JPanel();
         JButton addBtn = new JButton("Adicionar");
         JButton editBtn = new JButton("Editar");
@@ -44,15 +53,15 @@ public class MediaView extends JFrame {
         top.add(sortDuration);
         top.add(refreshBtn);
 
-        add(top, BorderLayout.NORTH);
+        getContentPane().add(top, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel(new Object[] {"Título","Tipo","Categoria","Duração","Específico","Caminho","Tamanho (bytes)"}, 0) {
+        tableModel = new DefaultTableModel(new Object[] {"Título","Tipo","Categoria","Duração","Infos","Caminho","Tamanho (bytes)"}, 0) {
             public boolean isCellEditable(int r, int c){ return false; }
         };
         table = new JTable(tableModel);
-        add(new JScrollPane(table), BorderLayout.CENTER);
+        getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 
-        // ações
+       
         addBtn.addActionListener(e -> showAddDialog());
         editBtn.addActionListener(e -> showEditDialog());
         removeBtn.addActionListener(e -> removeSelected());

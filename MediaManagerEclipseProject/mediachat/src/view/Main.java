@@ -4,9 +4,7 @@ package view;
 import controller.MediaController;
 import javax.swing.SwingUtilities;
 
-/**
- * Classe principal - contém o método main.
- */
+
 public class Main {
     public static void main(String[] args) {
         String storage = "data";
