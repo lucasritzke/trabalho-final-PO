@@ -1,11 +1,9 @@
-
 package model;
 
-/**
- * Classe Filme - duração em minutos e idioma do áudio.
- */
 public class Film extends Media {
+
     private static final long serialVersionUID = 1L;
+
     private int durationMinutes;
     private String audioLanguage;
 
@@ -15,14 +13,26 @@ public class Film extends Media {
         this.audioLanguage = audioLanguage;
     }
 
-    public int getDurationMinutes() { return durationMinutes; }
-    public void setDurationMinutes(int durationMinutes) { this.durationMinutes = durationMinutes; }
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
 
-    public String getAudioLanguage() { return audioLanguage; }
-    public void setAudioLanguage(String audioLanguage) { this.audioLanguage = audioLanguage; }
+    public void setDurationMinutes(int durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public String getAudioLanguage() {
+        return audioLanguage;
+    }
+
+    public void setAudioLanguage(String audioLanguage) {
+        this.audioLanguage = audioLanguage;
+    }
 
     @Override
-    public long getDurationValue() { return durationMinutes; }
+    public long getDurationValue() {
+        return durationMinutes;
+    }
 
     @Override
     public String displaySpecificAttributes() {

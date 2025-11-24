@@ -1,11 +1,9 @@
-
 package model;
 
-/**
- * Classe Music - duração em segundos e artista.
- */
 public class Music extends Media {
+
     private static final long serialVersionUID = 1L;
+
     private int durationSeconds;
     private String artist;
 
@@ -15,14 +13,26 @@ public class Music extends Media {
         this.artist = artist;
     }
 
-    public int getDurationSeconds() { return durationSeconds; }
-    public void setDurationSeconds(int durationSeconds) { this.durationSeconds = durationSeconds; }
+    public int getDurationSeconds() {
+        return durationSeconds;
+    }
 
-    public String getArtist() { return artist; }
-    public void setArtist(String artist) { this.artist = artist; }
+    public void setDurationSeconds(int durationSeconds) {
+        this.durationSeconds = durationSeconds;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
 
     @Override
-    public long getDurationValue() { return durationSeconds; }
+    public long getDurationValue() {
+        return durationSeconds;
+    }
 
     @Override
     public String displaySpecificAttributes() {
